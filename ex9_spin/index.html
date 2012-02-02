@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<title>spin
+</title> 
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<link rel="stylesheet" type="text/css" href="http://fgnass.github.com/spin.js/assets/fd-slider/fd-slider.css?v=2">
+<script type="text/javascript" src="http://fgnass.github.com/spin.js/assets/fd-slider/fd-slider.js"></script>
+</head> 
+<body> 
+<div id="wrap"> 
+	<!-- header --> 
+	<div id="header"> 
+		spin
+	</div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content"> 			
+			<div id="spinDiv"><canvas id="spinCanvas" width="150" height="150"></canvas></div>
+			<form id="opts">
+				<label>Lines:</label><input type="text" name="lines" min="6" max="16" step="2" value="12"><br>
+				<label>Length:</label><input type="text" name="length" min="0" max="25" value="7"><br>
+				<label>Width:</label><input type="text" name="width" min="2" max="20" value="4"><br>
+				<label>Radius:</label><input type="text" name="radius" min="10" max="30" value="10"><br>
+				<label>Trail:</label><input type="text" name="trail" min="10" max="100" value="60"><br>
+				<label>Speed:</label><input type="text" name="speed" min="1" max="2.2" step="0.1" value="2"><br>
+				<label>Shadow:</label><input type="checkbox" name="shadow"><br>
+				<!-- <label>Hwaccel:</label><input type="checkbox" name="hwaccel"><br> -->
+			</form>
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+	<!-- footer --> 
+	<div id="footer"> 
+	songgmo 2012-02-01
+	</div> 
+	<!-- //footer --> 
+</div> 
+<script type="text/javascript" src="Spin.js"></script>
+<script type="text/javascript" src="event.js"></script>
+<script type="text/javascript">
+
+
+var eCanvas,oLoadingSpin;
+eCanvas = document.getElementById('spinCanvas');
+oLoadingSpin = new $Spin(eCanvas,150,150);
+addPropertyEvent();
+
+function addPropertyEvent()
+{
+	var props= document.getElementsByTagName('input');
+	
+	oLoadingSpin.setLines(props[0].value);
+	oLoadingSpin.setLength(props[1].value);
+	oLoadingSpin.setWidth(props[2].value);
+	oLoadingSpin.setRadius(props[3].value);
+	oLoadingSpin.setTrail(props[4].value);
+	oLoadingSpin.setSpeed(240-(props[5].value*100));
+	oLoadingSpin.setShadow(props[6].checked);
+	
+	for(var mm in props)
+	{
+		if(props[mm].addEventListener) addEvent(props[mm],"change",changeProps);
+	}
+}
+function changeProps(e)
+{
+	var propName = e.currentTarget.name;
+	switch(propName)
+	{
+		case "lines":
+			oLoadingSpin.setLines(e.currentTarget.value);
+		break;
+		case "length":
+			oLoadingSpin.setLength(e.currentTarget.value);
+		break;
+		case "width":
+			oLoadingSpin.setWidth(e.currentTarget.value);
+		break;
+		case "radius":
+			oLoadingSpin.setRadius(e.currentTarget.value);
+		break;
+		case "trail":
+			oLoadingSpin.setTrail(e.currentTarget.value);
+		break;
+		case "speed":
+			oLoadingSpin.setSpeed(240-(e.currentTarget.value*100));
+			motionRestart();
+		break;
+		case "shadow":
+			oLoadingSpin.setShadow(e.currentTarget.checked);
+		break;
+		default:
+		break;
+	}	
+}
+</script>
+</body> 
+</html>

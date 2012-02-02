@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>QUnit Test</title>
+		<script type="text/javascript" src="qunit.js"></script>
+		<script type="text/javascript" src="SpinBox.js"></script>
+		<link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />	
+		<script type="text/javascript">
+
+			var textFeild,btnUp,btnDown;
+
+			window.onload = init;
+			
+			function init()
+			{
+				textFeild = document.getElementById("sb_textField");
+				btnUp = document.getElementById("sb_button_up");
+				btnDown = document.getElementById("sb_button_down");
+
+				module("SpinBox");
+				test("초기값 설정", chkFirstValue);
+				test("숫자 1씩 증가", increaseNum);
+				test("숫자 1씩 감소", decreaseNum);
+				test("문자, 숫자 조합 문자열을 숫자로 변환",chkString);
+				test("숫자 변경 시, 300이상의 경우",chkOverNum);
+				test("숫자 변경 시, 100이하의 경우",chkDownNum);
+				test("문자, 숫자 조합 문자열을 숫자로 변환 후, 300이상의 경우",chkConvertToRangedNum);
+				test("문자, 숫자 조합 문자열을 숫자로 변환 후, 100이하의 경우",chkConvertToRangedNum2);
+			}
+			
+			function chkFirstValue()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setCurrentNum(200);
+				equals( spinBox.getCurrentNum(), 200, "기대값 : 200, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+			function increaseNum()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setCurrentNum(200);
+				spinBox.increaseNum();
+				equals( spinBox.getCurrentNum(), 201, "기대값 : 201, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+			function decreaseNum()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setCurrentNum(200);
+				spinBox.decreaseNum();
+				equals( spinBox.getCurrentNum(), 199, "기대값 : 199, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+			function chkString()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				textFeild.value = ":as1j2jk3";
+				spinBox.changeText();
+				equals( spinBox.getCurrentNum(), 123, "문자값 :as1j2jk3, 기대값 : 123, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			function chkOverNum()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setCurrentNum(300);
+				spinBox.setMaxNumber(300);	
+				spinBox.increaseNum();
+				spinBox.increaseNum();
+				equals( spinBox.getCurrentNum(), 300, "기대값 : 300, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			function chkDownNum()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setCurrentNum(100);
+				spinBox.setMinNumber(100);	
+				spinBox.decreaseNum();
+				spinBox.decreaseNum();
+				equals( spinBox.getCurrentNum(), 100, "기대값 : 100, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+			function chkConvertToRangedNum()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setMaxNumber(300);	
+				spinBox.setMinNumber(100);	
+				textFeild.value = "as1j2jk32";
+				spinBox.changeText();
+				equals( spinBox.getCurrentNum(), 300, "기대값 : 300, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+			function chkConvertToRangedNum2()
+			{
+				var spinBox = new SpinBox(textFeild,btnUp,btnDown);
+				spinBox.setMaxNumber(300);	
+				spinBox.setMinNumber(100);	
+				textFeild.value = "as1jjk2";
+				spinBox.changeText();
+				equals( spinBox.getCurrentNum(), 100, "기대값 : 100, 결과값" );
+				spinBox = null;
+				delete spinBox;
+			}
+			
+		</script>
+	</head>
+	<body>
+		<ul style="font-family : 돋움; font-size:12px">
+			<li>스핀박스의 텍스트 상자에는 기본적으로 200 이 들어가게 해주세요</li>
+			<li>▲ 버튼을 누르면(mousedown) 숫자는 1이 증가하고, ▼ 버튼을 누르면 숫자는 1이 감소합니다</li>
+			<li>텍스트 상자에는 사용자가 숫자를 직접 입력 할 수 있으며 포커스 아웃(blur)시에 숫자 외의 글자는 모두 지워지게 해주세요. (만약 ab12c3 라고 입력했다면 123 만 남습니다)</li>
+			<li>텍스트 상자에 사용자가 직접 입력한 숫자가 100~300 범위를 벗어나면 포커스 아웃(blur)시에 100 미만 일때는 100 으로, 300 초과 일때는300 으로 설정되게 해주세요.</li>
+			<li>▲ 버튼 또는 ▼ 버튼를 누르고 있으면 처음 누르기 시작한지 0.5초 후부터 0.1초마다 1 씩 증감하도록 해주세요.</li>
+		</ul>
+		<h1 id="qunit-header">SpinBox QUnit Test</h1>
+		<h2 id="qunit-banner"></h2>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+
+		<div id="spinBox">
+			<input type="text" id="sb_textField" maxLength="3">
+			<span> 
+				<span class="sb_b"> 
+					<button type="button" id="sb_button_up">▲</button>
+				</span> 
+				<span> 
+					<button type="button" id="sb_button_down">▼</button>
+				</span> 
+			</span> 
+		</div>
+		
+	</body>
+</html>
