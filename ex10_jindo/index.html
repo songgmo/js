@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<title>jindo
+</title> 
+<link rel="stylesheet" type="text/css" href="style.css"> 
+</head> 
+<body> 
+<div id="wrap"> 
+	<!-- header --> 
+	<div id="header"> 
+		spinBox _ jindo
+	</div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content"> 			
+			<div id="spinBox">
+				<input type="text" id="sb_textField" maxLength="3">
+				<span> 
+					<span class="sb_b"> 
+						<button type="button" id="sb_button_up">▲</button>
+					</span> 
+					<span> 
+						<button type="button" id="sb_button_down">▼</button>
+					</span> 
+				</span> 
+			</div>
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+	<!-- header --> 
+	<div id="header"> 
+		drag&drop _ jindo
+	</div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content" class="drag"> 				
+			<div id="dropTarget">
+				<img id="dropImg" src="enjoy.jpg" width="100" height="100" border="0" alt="dropTarget">	
+			</div>
+			<div id="dragTarget">
+				<img id="dragImg" src="gmo.jpg" width="100" height="100" border="0" alt="dragTarget">	
+			</div>
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+	<!-- header --> 
+	<div id="header"> 
+		자판기 _ jindo
+	</div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content" class="zapangi"> 			
+			<div id="zapangi" class="box">커피자판기</div>
+			<div id="status" class="box"></div>		
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+
+
+	<!-- footer --> 
+	<div id="footer"> songgmo 2012-02-05
+	</div> 
+	<!-- //footer --> 
+</div> 
+<script type="text/javascript" src="jindo.all.ns.js"></script>
+<script type="text/javascript" src="SpinBox.js"></script>
+<script type="text/javascript" src="Drag.js"></script>
+<script type="text/javascript" src="zapangi.js"></script>
+<script type="text/javascript" src="Money.js"></script>
+<script type="text/javascript" src="ProductButton.js"></script>
+<script type="text/javascript" src="NormalButton.js"></script>
+
+
+<script type="text/javascript">
+//<!--[CDATA[
+
+// spinbox
+var elTextFeild = jindo.$("sb_textField");
+var elBtnUp = jindo.$("sb_button_up");
+var elBtnDown = jindo.$("sb_button_down");
+var oSpinBoxObj = new SpinBox(elTextFeild,elBtnUp,elBtnDown);
+oSpinBoxObj.setCurrentNum(200);	
+oSpinBoxObj.setMaxNumber(300);	
+oSpinBoxObj.setMinNumber(100);	
+
+
+// drag & drop
+var elDragObj = jindo.$("dragTarget");
+elDragObj.style.position = "absolute";
+elDragObj.style.top = "200px";
+elDragObj.style.left = "100px";
+elDragObj.style.width = "100px";
+elDragObj.style.height = "100px";
+elDragObj = new Drag(elDragObj);
+elDragObj.setDropFn(dropCheck);
+elDragObj.readyDrag();
+
+var elDropObj = jindo.$("dropTarget");
+elDropObj.style.position = "absolute";
+elDropObj.style.top = "250px";
+elDropObj.style.left = "500px";
+elDropObj.style.width = "100px";
+elDropObj.style.height = "100px";
+
+function dropCheck(x,y)
+{
+	var tx = parseInt(elDropObj.style.left);
+	var ty = parseInt(elDropObj.style.top);
+	var tw = tx + parseInt(elDropObj.style.width);
+	var th = ty + parseInt(elDropObj.style.height);
+
+	if(x >= tx && x <= tw && y >= ty && y <= th)
+	{
+		jindo.$("dropImg").src = "something.jpg";
+	}
+	else
+	{		
+		jindo.$("dropImg").src = "oops.jpg";
+	}
+	return;
+}
+
+
+
+
+
+</script>
+</body> 
+</html>
