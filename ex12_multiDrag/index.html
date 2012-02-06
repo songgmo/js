@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<title>multiDrag
+</title> 
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<style type="text/css">
+
+
+</style>
+</head> 
+<body> 
+<div id="wrap"> 
+	<!-- header --> 
+	<div id="header"> multiDrag 	</div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content">
+		
+
+
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+	<!-- footer --> 
+	<div id="footer"> songgmo 2012-02-06 </div> 
+	<!-- //footer --> 
+</div>
+<script type="text/javascript" charset="utf-8" src="jindo.all.ns.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.Component.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.UIComponent.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.DragArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.DropArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.Effect.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.Timer.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.Transition.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.RolloverArea.js"></script>
+<script type="text/javascript" charset="utf-8" src="jindo.Foggy.js"></script>
+<script type="text/javascript" charset="utf-8" src="MultiDrag.js"></script>
+<script type="text/javascript">
+var multiDrag = new MultiDrag(jindo.$("content"));
+multiDrag.run();
+
+/*
+var oTransition = new jindo.Transition();
+				
+jindo.$Fn(function(weEvent) {
+	
+	if (weEvent.element.tagName.toLowerCase() == "select") {
+		return;
+	}
+	
+	var oPos = weEvent.pos();
+	var sEffect = "easeOut";
+	
+	oTransition.abort().start(1000,
+		jindo.$('rect'), {
+			'@left' : jindo.Effect[sEffect](oPos.pageX + 'px')
+		},
+		jindo.$('rect'), {
+			'@top' : jindo.Effect[sEffect](oPos.pageY + 'px')
+		}
+	)
+}).attach(document, "click");
+
+
+
+var oRolloverArea = new jindo.RolloverArea(document.body, {
+		sClassName : 'rollover', // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+		bCheckMouseDown : true,
+		htStatus : {
+			sOver : "over",
+			sDown : "down"
+		}
+	});
+
+
+	var oFoggy = new jindo.Foggy()
+	oFoggy.getFog().onclick = function() { oFoggy.hide(); };
+
+	*/
+</script>
+</body> 
+</html>
