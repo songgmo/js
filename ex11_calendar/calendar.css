@@ -1,0 +1,96 @@
+/*
+ * ***************************
+ *  달력 컴포넌트용 css
+ * ***************************
+ */
+.calendar
+{
+	width: 170px;
+	//height: 180px;
+	background-color : #EEEEEE;
+	font-family:나눔고딕, 굴림; 
+	text-align : center;
+	color : #444444;
+}
+.calendar a:hover 
+{
+	color : #009900;
+}
+.show
+{
+	display : block;
+}
+.hide
+{
+	display : none;
+}
+.btn_prev_mon
+{
+	text-decoration: none;
+}
+.btn_next_mon
+{
+	text-decoration: none;
+}
+.btn_prev_year
+{
+	text-decoration: none;
+}
+.btn_next_year
+{
+	text-decoration: none;
+}
+.prevM
+{
+	color : #aaaaaa;
+}
+.nextM
+{
+	color : #aaaaaa;
+}
+.sun
+{
+	background-color : #FFCCCC;
+}
+.sat
+{
+	background-color : #CCCCFF;
+}
+.holiday
+{
+	color : #FF0000;
+	font-weight: bold;
+}
+.today
+{
+	background-color : #CCFFCC;
+	color : #000000;
+}
+.calendarYear
+{
+	color : #444444;
+	font-weight: bold;
+}
+.calendarMonth
+{
+	color : #000000;
+	font-size:30px; 
+	font-weight: bold;
+}
+.calendarDate
+{
+	padding : 2px 4px 4px 4px;
+	cursor: pointer;
+	text-decoration: none;
+}
+.calendarDate a:hover 
+{
+	cursor: pointer;
+	background-color : #888888;
+	color : #FFFFFF;
+}
+
+#calendar_layer
+{
+
+}

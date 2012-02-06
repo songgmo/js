@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<title>달력</title> 
+<link rel="stylesheet" type="text/css" href="style.css"> 
+</head> 
+<body> 
+<div id="wrap"> 
+	<!-- header --> 
+	<div id="header"> 달력 </div> 
+	<!-- //header -->
+	<!-- container --> 
+	<div id="container">
+		<!-- content --> 
+		<div id="content"> 
+			<input type="button" value="달력 컴포넌트" id="calendarView">
+			<input type="button" value="오늘" id="todayView">
+			<div id="calendar_layer"></div>
+		</div> 
+		<!-- //content --> 
+	</div> 
+	<!-- //container --> 
+	<!-- footer --> 
+	<div id="footer"> 
+	songgmo 2012-02-02
+	</div> 
+	<!-- //footer --> 
+</div> 
+<link rel="stylesheet" type="text/css" href="calendar.css"> 
+<script type="text/javascript" src="jindo.all.ns.js"></script>
+<script type="text/javascript" src="jindo.Component.js"></script>
+<script type="text/javascript" src="jindo.UIComponent.js"></script>
+<script type="text/javascript" src="nhn.CalendarComp_UI.js"></script>
+<script type="text/javascript" src="nhn.CalendarComp.js"></script>
+<script type="text/javascript">
+//<!--[CDATA[
+	var oCalendar = new nhn.CalendarComp(jindo.$("calendar_layer"));
+	oCalendar.activate();
+	var cBtn = jindo.$("calendarView");
+	var calendarBtn = jindo.$Fn(function(oEvent)
+	{
+		oEvent.stop(jindo.$Event.CANCEL_DEFAULT);
+		if(!oCalendar.isActivating())oCalendar.activate();else oCalendar.deactivate();
+	}, this);
+	calendarBtn.attach(cBtn, "click");
+
+	var todayBtn = jindo.$("todayView");
+	var viewToday = jindo.$Fn(function(oEvent)
+	{
+		oEvent.stop(jindo.$Event.CANCEL_DEFAULT);
+		if(!oCalendar.isActivating())oCalendar.activate();
+		oCalendar.makeCalendar(new Date());
+	}, this);
+	viewToday.attach(todayBtn, "click");
+//]]-->
+</script>
+</body> 
+</html>
